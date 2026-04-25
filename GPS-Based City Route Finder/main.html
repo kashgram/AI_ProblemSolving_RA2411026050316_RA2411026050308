@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A* NYC Pathfinder</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">A<span>*</span> <span>/ NYC Manhattan Pathfinder</span></div>
+  <div class="badges">
+    <div class="badge lit">A* ALGORITHM</div>
+    <div class="badge" id="b-explored">— nodes</div>
+    <div class="badge" id="b-status">IDLE</div>
+    <div class="badge" id="b-dist">— km</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-head">⬡ Manhattan Pathfinder</div>
+    <div class="sb-body">
+
+      <div>
+        <div class="sec-title">Select Locations A – F</div>
+        <div style="font-size:10px;color:var(--mut);margin-bottom:8px;line-height:1.5;">
+          1st click → <span style="color:var(--grn)">● Source</span> &nbsp; 2nd click → <span style="color:var(--red)">● Destination</span>
+        </div>
+        <div class="loc-grid" id="loc-grid"></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="pair-row">
+          <div class="pair-tag src">FROM</div>
+          <div class="pair-val empty" id="src-label">— not selected —</div>
+        </div>
+        <div class="pair-row">
+          <div class="pair-tag dst">TO</div>
+          <div class="pair-val empty" id="dst-label">— not selected —</div>
+          <button class="swap-btn" onclick="swapLocations()" title="Swap source & destination">⇄</button>
+        </div>
+      </div>
+
+      <button class="run-btn" id="run-btn" onclick="runSearch()" disabled>▶ RUN A* SEARCH</button>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="err-box" id="err-box"></div>
+
+      <div id="stats-section" style="display:none;">
+        <div class="sec-title" style="margin-bottom:6px;">Search Results</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-val" id="s-explored">—</div>
+            <div class="stat-lbl">NODES<br>EXPLORED</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="s-path">—</div>
+            <div class="stat-lbl">PATH<br>NODES</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="s-dist">—</div>
+            <div class="stat-lbl">TOTAL COST<br>(METRES)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="s-km">—</div>
+            <div class="stat-lbl">TOTAL COST<br>(KM)</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="dir-section" style="display:none;">
+        <div class="sec-title" style="margin-bottom:6px;">↪ Route Directions</div>
+        <div class="dir-list" id="dir-list"></div>
+      </div>
+
+      <div class="legend">
+        <div class="leg-row"><div style="width:18px;height:3px;background:#00d4ff;opacity:.7;border-radius:2px;flex-shrink:0"></div>Explored roads (A* frontier)</div>
+        <div class="leg-row"><div style="width:18px;height:3px;background:#f5c518;border-radius:2px;flex-shrink:0"></div>Optimal shortest path</div>
+        <div class="leg-row"><div class="leg-dot" style="background:#2dea7a"></div>Source location</div>
+        <div class="leg-row"><div class="leg-dot" style="background:#ff4560"></div>Destination location</div>
+      </div>
+
+      <button class="reset-btn" onclick="resetAll()">↺ RESET</button>
+    </div>
+  </div>
+
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="map-hint" id="map-hint">Select Source and Destination from the panel</div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+</body>
+</html>"""
